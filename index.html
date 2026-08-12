@@ -2,129 +2,318 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>نظام إدارة الحجاج 2026</title>
+<title>الحج 2026</title>
 <style>
-:root{--navy:#173246;--gold:#c99a52;--paper:#f5f2eb;--card:#fffdf8;--line:#e5ded3;--muted:#7c8583}
-body{margin:0;background:var(--paper);color:var(--navy);font-family:Tahoma,Arial,sans-serif}
-.shell{max-width:900px;margin:auto;padding:20px}.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:15px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
-.actions{display:flex;gap:5px}button{cursor:pointer;padding:8px 12px;border-radius:6px;border:1px solid var(--line);background:#fff}
-.primary{background:var(--gold);color:white;border:none}
-table{width:100%;border-collapse:collapse;margin-top:20px}th,td{border:1px solid #ccc;padding:10px;text-align:right}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);place-items:center;padding:20px}
-.modal.open{display:grid}.box{background:white;padding:20px;border-radius:12px;width:100%;max-width:500px}
-@media print{.no-print{display:none}}
+:root{--navy:#173246;--gold:#c99a52;--paper:#f5f2eb;--card:#fffdf8;--line:#e5ded3;--muted:#7c8583}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--navy);font-family:Tahoma,Arial,sans-serif}button,input{font:inherit}button{cursor:pointer}.shell{max-width:1150px;margin:auto;padding:22px 16px}.header{display:flex;justify-content:space-between;align-items:center}.brand{display:flex;gap:10px;align-items:center;font-weight:bold}.mark{background:var(--navy);color:var(--gold);width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:25px}.brand small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.tools{display:flex;gap:8px}.icon{width:40px;height:40px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--navy)}h1{font-size:31px;margin:37px 0 5px}.hero{margin-top:26px;padding:24px;border-radius:18px;background:var(--navy);color:white;display:flex;justify-content:space-between;align-items:center}.hero h2{margin:0;font-size:24px;line-height:1.6}.hero b{color:#e2bd72}.primary{background:var(--gold);color:var(--navy);border:0;border-radius:9px;padding:12px 16px;font-weight:bold}.summary{display:flex;gap:12px;margin:16px 0}.groups{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.group{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:11px}.group b{font-size:16px;margin-right:5px}.stat{flex:1;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px}.stat span{display:block;color:var(--muted);font-size:11px}.stat strong{display:block;font-size:31px;margin-top:11px}.bar{display:flex;gap:9px;align-items:center;margin-top:25px}.search{flex:1;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--navy);padding:12px}.download,.clear{border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--navy);padding:12px 14px}.clear{display:none}.section-head{display:flex;justify-content:space-between;align-items:end;margin:28px 0 14px}.section-head h3{margin:0;font-size:18px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.card{background:var(--card);border:1px solid var(--line);border-radius:15px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between}.preview{height:150px;background:linear-gradient(135deg,#e9dfca,#dce5e2);display:grid;place-items:center;font-size:48px;color:var(--navy);overflow:hidden;cursor:pointer}.preview img{width:100%;height:100%;object-fit:cover}.body{padding:14px}.label{color:#b07c34;font-size:10px}.body h4{font-size:15px;margin:7px 0;cursor:pointer}.body h4:hover{color:var(--gold)}.foot{border-top:1px solid var(--line);margin-top:13px;padding-top:10px;display:flex;justify-content:space-between;align-items:center;font-size:10px;color:var(--muted)}.card-actions{display:flex;gap:6px}.card-actions button{background:transparent;border:1px solid var(--line);border-radius:6px;padding:4px 8px;font-size:11px;color:var(--navy)}.card-actions button.del{color:#b91c1c;border-color:#fca5a5}.empty{border:1px dashed #cdbfae;border-radius:15px;text-align:center;padding:55px 20px;color:var(--muted)}.empty strong{display:block;color:var(--navy);font-size:16px;margin-bottom:7px}.modal{display:none;position:fixed;inset:0;background:#173246aa;place-items:center;padding:16px;z-index:1000}.modal.open{display:grid}.box{background:var(--card);border-radius:16px;padding:22px;width:min(440px,100%)}.box h2{margin:0 0 15px}.box label{display:block;color:var(--muted);font-size:11px;margin:12px 0}.box input{display:block;width:100%;margin-top:6px;padding:11px;border:1px solid var(--line);border-radius:8px;background:transparent;color:var(--navy)}.upload{border:1px dashed var(--gold);border-radius:10px;padding:24px;text-align:center;color:var(--muted);font-size:12px;margin:14px 0;cursor:pointer}.actions{display:flex;gap:8px;justify-content:flex-start}.secondary{border:0;background:#eee8de;color:var(--navy);border-radius:9px;padding:11px 15px}
+
+/* نافذة عرض التفاصيل المنبثقة */
+.details-modal{display:none;position:fixed;inset:0;background:#173246bb;place-items:center;padding:16px;z-index:1100}.details-modal.open{display:grid}
+.details-box{background:var(--card);border-radius:16px;padding:24px;width:min(500px,100%);text-align:center;max-height:90vh;overflow-y:auto}
+.details-box img{max-width:100%;max-height:300px;border-radius:8px;margin:15px 0;object-fit:contain}
+
+.dark{--paper:#111e28;--card:#172936;--navy:#f2efe7;--line:#29404c;--muted:#a8b1ad}
+.dark .mark{background:#c99a52;color:#173246}.dark .hero{background:#0c1820}.dark .preview{background:linear-gradient(135deg,#304650,#24353b)}
+
+@media(max-width:700px){.shell{padding:18px 13px}.header{align-items:flex-start}h1{font-size:25px;margin-top:28px}.hero{display:block;padding:20px}.hero .primary{margin-top:16px}.summary{gap:7px}.stat{padding:12px}.stat strong{font-size:25px}.stat span{font-size:10px}.bar{flex-wrap:wrap}.search{flex-basis:100%;order:-1}.grid{grid-template-columns:repeat(2,1fr);gap:9px}.preview{height:105px}.body{padding:10px}.body h4{font-size:12px}}.dark .card-actions button{color:var(--navy);border-color:var(--line)}
+
+@media print{
+    body{background:white;color:black}
+    .tools,.hero,.summary,.bar,.section-head,.card-actions,.modal,.details-modal,.primary{display:none!important}
+    .shell{padding:0;max-width:100%}
+    .grid{display:block}
+    .card{border:none;box-shadow:none;margin-bottom:20px;page-break-inside:avoid}
+    /* جدول الطباعة المنظم */
+    .print-table{width:100%;border-collapse:collapse;margin-top:10px}
+    .print-table th,.print-table td{border:1px solid #333;padding:8px;text-align:right;font-size:12px}
+    .print-table th{background:#eee!important;color:#000!important}
+}
 </style>
 </head>
 <body>
 <div class="shell">
-    <h1>سجل الحجاج 2026</h1>
-    <div style="margin-bottom:20px">
-        <input type="text" id="search" placeholder="بحث بالاسم أو المندوب..." style="padding:10px;width:70%">
-        <button class="primary" onclick="openModal()">+ إضافة جديد</button>
-    </div>
-    <div id="grid"></div>
+<header class="header"><div class="brand"><span class="mark">⌒</span><div>الحج 2026<small>سجل المستندات</small></div></div><div class="tools"><button class="icon" id="theme">◐</button><button class="icon" id="clearData">⌫</button></div></header>
+<h1>ملفات الحجاج</h1>
+<section class="hero"><div><h2>ملفات الحجاج<br><b>الحج 2026</b></h2></div><button class="primary" id="addButton">＋ إضافة مستند</button></section>
+<section class="summary"><div class="stat"><span>عدد الأشخاص</span><strong id="total">00</strong></div><div class="stat"><span>صور مرفوعة</span><strong id="uploaded">00</strong></div><div class="stat"><span>بدون صورة</span><strong id="missing">00</strong></div></section><div class="groups" id="groups"></div>
+<div class="bar">
+    <input class="search" id="search" placeholder="بحث بالاسم أو التبعية...">
+    <button class="clear" id="clear">مسح البحث</button>
+    <button class="download" id="exportData">حفظ نسخة</button>
+    <button class="download" id="importButton">استيراد</button>
+    <input id="importFile" type="file" accept=".json,application/json" hidden>
+    <button class="download" id="printAll">↓ طباعة الكشف</button>
+</div>
+<div class="section-head"><div><h3>المستندات <small id="count"></small></h3></div></div>
+<section class="grid" id="grid"></section><div class="empty" id="empty"><strong>لا توجد ملفات</strong></div>
 </div>
 
-<!-- Modal -->
+<!-- نافذة الإضافة / التعديل -->
 <div class="modal" id="modal">
     <div class="box">
-        <h2 id="modalTitle">إضافة حاج</h2>
+        <h2 id="modalTitle">إضافة مستند</h2>
         <input type="hidden" id="editIndex">
-        <input id="personName" placeholder="اسم الحاج" style="width:100%;padding:8px;margin-bottom:10px">
-        <input id="note" placeholder="اسم المندوب/التبعية" style="width:100%;padding:8px;margin-bottom:10px">
-        <input type="file" id="file" accept="image/*" style="margin-bottom:10px">
-        <div style="display:flex;gap:10px">
-            <button onclick="closeModal()">إلغاء</button>
-            <button class="primary" onclick="saveRecord()">حفظ البيانات</button>
+        <label>اسم صاحب الجواز أو البطاقة<input id="personName" placeholder="اكتب الاسم هنا"></label>
+        <label>تبع مين<input id="note" placeholder="اسم المندوب أو الجهة"></label>
+        <label class="upload" for="file">اضغط لاختيار صورة المستند<input id="file" type="file" accept="image/*" hidden></label>
+        <div class="actions">
+            <button class="secondary" id="cancel">إلغاء</button>
+            <button class="primary" id="save">حفظ المستند</button>
         </div>
     </div>
 </div>
 
-<script>
-let records = JSON.parse(localStorage.getItem('hajj_data') || '[]');
+<!-- نافذة عرض التفاصيل عند الضغط على الاسم أو الصورة -->
+<div class="details-modal" id="detailsModal">
+    <div class="details-box">
+        <h2 id="detName" style="margin-top:0"></h2>
+        <p style="color:var(--muted); font-size:13px;" id="detNote"></p>
+        <div id="detImageContainer"></div>
+        <div class="actions" style="justify-content:center; margin-top:15px;">
+            <button class="secondary" id="closeDetails">إغلاق</button>
+            <a id="downloadBtn" class="primary" style="text-decoration:none; display:inline-block; line-height:normal;" download="hajj-image.jpg">تحميل الصورة عالجهاز</a>
+        </div>
+    </div>
+</div>
 
-function render() {
-    const q = document.getElementById('search').value.toLowerCase();
-    const grid = document.getElementById('grid');
-    grid.innerHTML = '';
-    records.filter(r => r.name.toLowerCase().includes(q) || r.note.toLowerCase().includes(q)).forEach((r, i) => {
-        const div = document.createElement('div');
-        div.className = 'card';
-        div.innerHTML = `
-            <div onclick="showDetails(${i})" style="cursor:pointer">
-                <strong>${r.name}</strong><br><small style="color:gray">${r.note}</small>
-            </div>
-            <div class="actions">
-                <button onclick="editRecord(${i})">تعديل</button>
-                <button onclick="deleteRecord(${i})" style="color:red">حذف</button>
+<!-- حاوية الطباعة المجدولة المخفية بالشاشة العادية وتظهر عند الطباعة -->
+<div id="printContainer" style="display:none;"></div>
+
+<script>
+var records=[];
+try{records=JSON.parse(localStorage.getItem('hajj2026_records_v3')||'[]');if(!Array.isArray(records))records=[]}catch(e){records=[]}
+
+var grid=document.getElementById('grid');
+var empty=document.getElementById('empty');
+var search=document.getElementById('search');
+var clear=document.getElementById('clear');
+
+function persist(){
+    try{localStorage.setItem('hajj2026_records_v3',JSON.stringify(records));return true}
+    catch(e){alert('مساحة التخزين ممتلئة! يرجى تصغير حجم الصور أو حذف بعض البيانات.');return false}
+}
+
+function refresh(){
+    var q=search.value.trim().toLowerCase();
+    // فلترة ذكية تبحث في الاسم وفي التبعية (تبع مين) في نفس الوقت
+    var shown=records.filter(function(r){return !q||(r.name+' '+(r.note||'')).toLowerCase().indexOf(q)>=0});
+    
+    grid.innerHTML='';
+    empty.style.display=shown.length?'none':'block';
+    clear.style.display=q?'block':'none';
+    
+    document.getElementById('count').textContent=shown.length;
+    document.getElementById('total').textContent=String(records.length).padStart(2,'0');
+    document.getElementById('uploaded').textContent=String(records.filter(function(r){return r.image}).length).padStart(2,'0');
+    document.getElementById('missing').textContent=String(records.filter(function(r){return !r.image}).length).padStart(2,'0');
+    
+    var tally={};
+    records.forEach(function(r){var key=r.note||'بدون تبعية';tally[key]=(tally[key]||0)+1});
+    document.getElementById('groups').innerHTML=Object.keys(tally).map(function(k){return '<div class="group">'+k+' <b>'+tally[k]+'</b></div>'}).join('');
+    
+    shown.forEach(function(r,i){
+        // نحدد الـ index الحقيقي داخل مصفوفة records الأصلية عشان التعديل والحذف يشتغلو صح مع الفلترة
+        var realIndex = records.indexOf(r);
+        var card=document.createElement('article');
+        card.className='card';
+        var visual=r.image?'<img src="'+r.image+'" alt="صورة المستند">':'▤';
+        
+        card.innerHTML=`
+            <div class="preview" onclick="showDetails(${realIndex})">${visual}</div>
+            <div class="body">
+                <span class="label">ملف ${String(realIndex+1).padStart(2,'0')} · ${(r.note||'مستند')}</span>
+                <h4 onclick="showDetails(${realIndex})">${r.name}</h4>
+                <div class="foot">
+                    <span>${(r.image?'● صورة مرفوعة':'! بدون صورة')}</span>
+                    <div class="card-actions">
+                        <button onclick="editRecord(${realIndex})">تعديل</button>
+                        <button class="del" onclick="deleteRecord(${realIndex})">حذف</button>
+                    </div>
+                </div>
             </div>
         `;
-        grid.appendChild(div);
+        grid.appendChild(card);
     });
 }
 
-function saveRecord() {
-    const name = document.getElementById('personName').value;
-    const note = document.getElementById('note').value;
-    const index = document.getElementById('editIndex').value;
-    const fileInput = document.getElementById('file');
-    
-    if(!name) return alert('اكتب الاسم');
+function openModal(isEdit=false){
+    document.getElementById('modalTitle').textContent = isEdit ? 'تعديل مستند' : 'إضافة مستند';
+    document.getElementById('modal').classList.add('open');
+}
+function closeModal(){
+    document.getElementById('modal').classList.remove('open');
+    document.getElementById('editIndex').value='';
+    document.getElementById('personName').value='';
+    document.getElementById('note').value='';
+    document.getElementById('file').value='';
+}
 
-    const record = { name, note, image: '' };
-    
-    if(fileInput.files.length > 0) {
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            record.image = e.target.result;
-            finishSave(record, index);
+// ضغط الصور تلقائياً لتناسب الموبايل
+function compressImage(file, callback) {
+    if (!file || file.type.indexOf('image') !== 0) { callback(''); return; }
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        var img = new Image();
+        img.onload = function() {
+            var canvas = document.createElement('canvas');
+            var maxWidth = 800, maxHeight = 800, width = img.width, height = img.height;
+            if (width > height) { if (width > maxWidth) { height *= maxWidth / width; width = maxWidth; } }
+            else { if (height > maxHeight) { width *= maxHeight / height; height = maxHeight; } }
+            canvas.width = width; canvas.height = height;
+            var ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            callback(canvas.toDataURL('image/jpeg', 0.7));
         };
-        reader.readAsDataURL(fileInput.files[0]);
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+function save(){
+    var name=document.getElementById('personName').value.trim();
+    if(!name){alert('اكتب اسم صاحب المستند');return}
+    var f=document.getElementById('file').files[0];
+    var editIdx=document.getElementById('editIndex').value;
+    
+    var proceed=function(image){
+        if(editIdx !== ''){
+            // تعديل سجل موجود
+            records[editIdx].name = name;
+            records[editIdx].note = document.getElementById('note').value.trim();
+            if(image) records[editIdx].image = image; // لو مرفعش صوره جديدة بيسيب القديمة زي ما هي
+        } else {
+            // إضافة سجل جديد
+            var record={name:name,note:document.getElementById('note').value.trim(),image:image||'',createdAt:Date.now()};
+            records.unshift(record);
+        }
+        
+        if(!persist()) return;
+        refresh();
+        closeModal();
+    };
+
+    if(f){
+        compressImage(f, function(compressedData){ proceed(compressedData); });
     } else {
-        record.image = index !== '' ? records[index].image : '';
-        finishSave(record, index);
+        var existingImg = editIdx !== '' ? records[editIdx].image : '';
+        proceed(existingImg);
     }
 }
 
-function finishSave(record, index) {
-    if(index !== '') records[index] = record;
-    else records.push(record);
-    localStorage.setItem('hajj_data', JSON.stringify(records));
-    closeModal();
-    render();
-}
-
-function deleteRecord(i) { if(confirm('هل أنت متأكد؟')) { records.splice(i, 1); localStorage.setItem('hajj_data', JSON.stringify(records)); render(); } }
-
-function editRecord(i) {
+function editRecord(i){
     document.getElementById('editIndex').value = i;
     document.getElementById('personName').value = records[i].name;
     document.getElementById('note').value = records[i].note;
-    openModal();
+    openModal(true);
 }
 
-function showDetails(i) {
-    const r = records[i];
-    const win = window.open("", "_blank");
-    win.document.write(`
-        <div style="text-align:center;font-family:sans-serif">
-            <h1>${r.name}</h1>
-            <p>التبعية: ${r.note}</p>
-            ${r.image ? `<img src="${r.image}" style="max-width:300px"><br><a href="${r.image}" download="image.jpg">تحميل الصورة</a>` : 'لا توجد صورة'}
-        </div>
-    `);
+function deleteRecord(i){
+    if(confirm('هل أنت متأكد من حذف هذا السجل؟')){
+        records.splice(i, 1);
+        persist();
+        refresh();
+    }
 }
 
-function openModal() { document.getElementById('modal').classList.add('open'); }
-function closeModal() { 
-    document.getElementById('modal').classList.remove('open');
-    document.getElementById('editIndex').value = '';
-    document.getElementById('personName').value = '';
-    document.getElementById('note').value = '';
+// نافذة عرض التفاصيل الكاملة وتحميل الصورة
+function showDetails(i){
+    var r = records[i];
+    document.getElementById('detName').textContent = r.name;
+    document.getElementById('detNote').textContent = 'تبع: ' + (r.note || 'غير محدد');
+    var imgContainer = document.getElementById('detImageContainer');
+    var downloadBtn = document.getElementById('downloadBtn');
+    
+    if(r.image){
+        imgContainer.innerHTML = '<img src="'+r.image+'" alt="صورة المستند">';
+        downloadBtn.style.display = 'inline-block';
+        downloadBtn.href = r.image;
+        downloadBtn.download = (r.name || 'document') + '.jpg';
+    } else {
+        imgContainer.innerHTML = '<p style="color:var(--muted); margin:30px 0;">لا توجد صورة مرفوعة لهذا المستند</p>';
+        downloadBtn.style.display = 'none';
+    }
+    document.getElementById('detailsModal').classList.add('open');
 }
 
-document.getElementById('search').oninput = render;
-render();
+document.getElementById('closeDetails').onclick = function(){
+    document.getElementById('detailsModal').classList.remove('open');
+};
+
+// طباعة الكشف في جدول منظم ومقسّم حسب التبعية
+function printAll(){
+    if(!records.length){alert('لا توجد ملفات للطباعة بعد');return}
+    
+    // تجميع الحجاج حسب التبعية (تبع مين)
+    var groups = {};
+    records.forEach(function(r){
+        var key = r.note || 'بدون تبعية';
+        if(!groups[key]) groups[key] = [];
+        groups[key].push(r);
+    });
+    
+    var printHTML = '<h2 style="text-align:center; font-family:Tahoma;">كشف حجاج 2026</h2>';
+    
+    for(var groupName in groups){
+        printHTML += '<h3 style="margin-top:20px; font-family:Tahoma; border-bottom:2px solid #333; padding-bottom:5px;">الجهة / المندوب: ' + groupName + '</h3>';
+        printHTML += '<table class="print-table"><thead><tr><th style="width:40px">م</th><th style="width:40%">اسم الحاج</th><th>التبعية / ملاحظات</th><th style="width:70px; text-align:center;">الصورة</th></tr></thead><tbody>';
+        
+        groups[groupName].forEach(function(r, idx){
+            printHTML += '<tr>';
+            printHTML += '<td>'+(idx+1)+'</td>';
+            printHTML += '<td><strong>'+r.name+'</strong></td>';
+            printHTML += '<td>'+(r.note||'-')+'</td>';
+            printHTML += '<td style="text-align:center;">'+(r.image ? 'مرفوعة' : 'بدون')+'</td>';
+            printHTML += '</tr>';
+        });
+        printHTML += '</tbody></table>';
+    }
+    
+    var container = document.getElementById('printContainer');
+    container.innerHTML = printHTML;
+    container.style.display = 'block';
+    
+    window.print();
+    
+    container.style.display = 'none';
+}
+
+function exportData(){
+    var data={app:'الحج 2026',version:3,createdAt:new Date().toISOString(),records:records};
+    var blob=new Blob([JSON.stringify(data)],{type:'application/json'});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');a.href=url;a.download='hajj-2026-backup.json';
+    document.body.appendChild(a);a.click();a.remove();
+    setTimeout(function(){URL.revokeObjectURL(url)},1000);
+}
+
+function importData(file){
+    if(!file)return;
+    var reader=new FileReader();
+    reader.onload=function(e){
+        try{
+            var data=JSON.parse(e.target.result);
+            if(!data||!Array.isArray(data.records))throw new Error('invalid');
+            records=data.records;persist();refresh();
+            alert('تم استيراد النسخة بنجاح');
+        }catch(err){alert('ملف النسخة غير صحيح')}
+    };
+    reader.readAsText(file);
+}
+
+function bind(){
+    document.getElementById('addButton').onclick=function(){ openModal(false); };
+    document.getElementById('cancel').onclick=closeModal;
+    document.getElementById('save').onclick=save;
+    document.getElementById('theme').onclick=function(){document.body.classList.toggle('dark')};
+    document.getElementById('printAll').onclick=printAll;
+    document.getElementById('exportData').onclick=exportData;
+    document.getElementById('importButton').onclick=function(){document.getElementById('importFile').click()};
+    document.getElementById('importFile').onchange=function(e){importData(e.target.files[0]);e.target.value=''};
+    search.oninput=refresh;
+    clear.onclick=function(){search.value='';refresh()};
+    document.getElementById('clearData').onclick=function(){if(confirm('مسح كل البيانات والصور المحفوظة؟')){records=[];persist();refresh()}};
+}
+
+bind();refresh();
 </script>
 </body>
 </html>
